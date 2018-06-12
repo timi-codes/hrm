@@ -37,7 +37,7 @@ http.createServer(function (req, res) {
                 return responder.send500(error,data);
             }
             if (!data) {
-// send a 404 error
+        // send a 404 error
                 return responder.send404(res);
             }
             // send the data with a 200 status code
