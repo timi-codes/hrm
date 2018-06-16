@@ -1,4 +1,5 @@
 let http = require('http');
+require('./lib/connection');
 let employeeService = require('./lib/employees');
 let responder = require('./lib/responseGenerator');
 let staticFile = responder.staticFile('./public');

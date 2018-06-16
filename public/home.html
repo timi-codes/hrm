@@ -1,9 +1,15 @@
-<html>
+<html ng-app="app">
 <head>
     <title>HRM website</title>
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+<input ng-model="example"/>
+<div>{{example}}</div>
 <h1>HRM Websites</h1>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<script>
+let app = angular.module('app',[]);
+</script>
 </body>
 </html>
