@@ -3,15 +3,55 @@
         <input type="text" ng-model="firstName" placeholder="first name">
         <input type="text" ng-model="lastName" placeholder="last name">
     <button ng-disabled="!(firstName.length && lastName.length)" ng-click="add()">Add</button>
-    <table>
-        <tr ng-repeat="p in presidents">
+
+        <table>
+            <button ng-click="sortPeople()">Sort</button>
+
+            <tr ng-repeat="p in presidents">
             <td>{{p.first}}</td>
             <td>{{p.last}}</td>
             <td>
                 <button ng-click="$parent.remove(p)">Remove</button>
+                <!--immediate parent scope i.e main controller scope-->
             </td>
         </tr>
     </table>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script>
+        var app = angular.module('app',[]);
+        app.controller('main', ['$scope',function ($scope) {
+            $scope.firstName = $scope.lastName = '';
+
+            $scope.presidents = [{
+                first: 'Abraham',
+                last: 'Lincoln'
+            },{
+                first: 'Andrew',
+                last: 'Johnson'
+            },{
+                first: 'Ulysses',
+                last: 'Grant'
+            }];
+            
+            $scope.add = function () {
+                $scope.presidents.push({
+                    first: $scope.firstName,
+                    last: $scope.lastName
+                });
+
+                $scope.firstName = $scope.lastName = '';
+            };
+            
+            $scope.remove = function (president) {
+                $scope.presidents.splice($scope.presidents.indexOf(president),1);
+            };
+
+
+            $scope.sortPeople = function () {
+                $scope.presidents.sort((a,b)=>a.first.localeCompare(b.first));
+            };
+
+        }]);
+    </script>
 </body>
 </html>

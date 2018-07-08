@@ -50,4 +50,27 @@ router.put('/employees/:employeeId',function (req, res, next) {
     });
 });
 
+router.post('/employees',function (req, res, next) {
+    let newEmployee = new Employee(req.body);
+
+    newEmployee.save(function (error, employee) {
+        if (error){
+            return next(error);
+        }
+        res.json(employee);
+    });
+});
+
+router.delete('/employees/:employeeId', function (req, res, next) {
+    Employee.remove({
+        id: req.params.employeeId
+    }, function (error, results) {
+        if (error){
+            return next(error);
+        }
+        //respond with valid data
+        res.json(results);
+    });
+});
+
 module.exports = router;
